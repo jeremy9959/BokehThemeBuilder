@@ -349,16 +349,13 @@ Axis_Options = {
         ),
         "axis_label_text_font_size": (
             ["10pt", "12pt", "16pt", "24pt", "32pt"],
-            ["10pt", "12pt", "16pt", "24pt", "32pt"],
+            ["10pt", "12pt", "16pt", "24pt", "32pt"]
         ),
+        "major_label_text_font": (["helvetica","times","calibri"],["helvetica","times","calibri"]),
+        "axis_label_text_font":  (["helvetica","times","calibri"],["helvetica","times","calibri"]),
     },
     "strings": {
-        "y_range_name": "default",
-        "name": "None",
-        "major_label_text_font": "helvetica",
-        "x_range_name": "default",
-        "axis_label_text_font": "helvetica",
-        "axis_label": "",
+        "axis_label": "Label",
     },
     "ints": {
         "axis_line_dash_offset": 0,

@@ -37,7 +37,7 @@ class ModelBuilder:
                 ("ints", self.make_int),
                 ("floats", self.make_float),
                 ("colors", self.make_color),
-                ("string", self.make_string),
+                ("strings", self.make_string),
         ]:
             try:
                 for attribute, options in self.Options[kind].items():
@@ -105,6 +105,6 @@ class ModelBuilder:
         area = TextInput(value="Title", title=param)
         area.on_change(
             "value",
-            partial(self._single_handler, param_dict, param, lambda x: str(x))
+            partial(self._single_handler, param_dict, param, lambda x: x)
             )
         return area
