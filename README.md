@@ -1,6 +1,6 @@
 ## BokehModelBuilder
 
-![](./bokeh_sample.png)
+![](./bokeh_sample.png | width 200)
 
 [bokeh](http://bokeh.org) is a library for generating interactive graphics and dashboards in python. 
 Every component offers a myriad of customizing options, and I find it impossible to keep track of them.
