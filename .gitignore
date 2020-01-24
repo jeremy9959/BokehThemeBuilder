@@ -1,0 +1,10 @@
+.vscode/
+*.txt
+*.ipynb_checkpoints
+.DS_Store
+*~
+__init__.py
+__pycache__
+png/
+*~
+\#*
