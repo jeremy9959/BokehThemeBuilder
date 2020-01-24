@@ -2,7 +2,7 @@
 
 <table>
 <tr><td><img src="bokeh_sample.png" width=200 /></td><td><img src="twisted_bokeh.png" width=200/> </td></tr>
-</table.
+</table>
 
 [bokeh](http://bokeh.org) is a library for generating interactive graphics and dashboards in python. 
 Every component offers a myriad of customizing options, and I find it impossible to keep track of them.
@@ -18,6 +18,6 @@ $ bokeh serve trial.py
 
 As yet, you can't output the results!
 
-
+<img src="ui.png" width=300/>
 
 
