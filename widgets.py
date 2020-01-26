@@ -45,7 +45,9 @@ class ModelBuilder:
                     self.widgets.append(chooser)
             except KeyError:
                 continue
-            
+
+        self.widgets = sorted(self.widgets,key=lambda x: x.name)
+        
     def _choice_handler(self, param_dict, param, choices, values, attr, old, new):
         print("attr=", attr, "old=", old, "opt=", new, "who=", param)
         choice_dict = dict(zip(choices, values))
@@ -61,7 +63,7 @@ class ModelBuilder:
         self.param_dict[param] = transform(new)
 
     def make_choice(self, choices, values, default, param, param_dict):
-        radio = Select(options=choices, value=choices[default], title=param)
+        radio = Select(options=choices, value=choices[default], title=param,name=param)
         radio.on_change(
             "value",
             partial(self._choice_handler,  param_dict, param, choices, values),
@@ -69,7 +71,7 @@ class ModelBuilder:
         return radio
 
     def make_multi_choice(self, choices, values, default, param, param_dict):
-        checkbox = CheckboxGroup(labels=choices, inline=False)
+        checkbox = CheckboxGroup(labels=choices, inline=False,name=param)
         checkbox.on_change(
             "active",
             partial(
@@ -79,7 +81,7 @@ class ModelBuilder:
         return checkbox
 
     def make_float(self, default, param, param_dict):
-        area = TextInput(value=str(default), title=param)
+        area = TextInput(value=str(default), title=param,name=param)
         area.on_change(
             "value",
             partial(self._single_handler,  param_dict, param, lambda x: float(x)),
@@ -87,7 +89,7 @@ class ModelBuilder:
         return area
 
     def make_int(self, default, param, param_dict):
-        area = TextInput(value=str(default), title=param)
+        area = TextInput(value=str(default), title=param,name=param)
         area.on_change(
             "value",
             partial(self._single_handler,  param_dict, param, lambda x: int(x)),
@@ -95,14 +97,14 @@ class ModelBuilder:
         return area
 
     def make_color(self, default, param, param_dict):
-        picker = ColorPicker(color=default, title=param)
+        picker = ColorPicker(color=default, title=param,name=param)
         picker.on_change(
             "color", partial(self._single_handler,  param_dict, param, lambda x: x)
         )
         return picker
 
     def make_string(self, default, param, param_dict):
-        area = TextInput(value="Title", title=param)
+        area = TextInput(value="Title", title=param,name=param)
         area.on_change(
             "value",
             partial(self._single_handler, param_dict, param, lambda x: x)

@@ -1,3 +1,4 @@
+from sortedcollections import SortedDict
 from bokeh.models.scales import LogScale, LinearScale
 from bokeh.models.tools import (
     BoxEditTool,
@@ -276,7 +277,7 @@ Title_Options = {
         "border_line_width": 1.0,
         "text_alpha": 1.0,
     },
-    "string": {"text": ""},
+    "strings": {"text": ""},
 }
 
 Axis_Options = {
