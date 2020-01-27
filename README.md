@@ -1,8 +1,6 @@
 ## BokehModelBuilder
 
-<table>
-<tr><td><img src="bokeh_sample.png" width=200 /></td><td><img src="twisted_bokeh.png" width=200/> </td></tr>
-</table>
+<img src="ui.png" width=300/>
 
 [bokeh](http://bokeh.org) is a library for generating interactive graphics and dashboards in python. 
 Every component offers a myriad of customizing options, and I find it impossible to keep track of them.
@@ -26,6 +24,6 @@ and navigate in your browser to localhost port 5006.
 
 
 
-<img src="ui.png" width=300/>
+
 
 
