@@ -1,85 +1,12 @@
 from sortedcollections import SortedDict
 from bokeh.models.scales import LogScale, LinearScale
-from bokeh.models.tools import (
-    BoxEditTool,
-    BoxSelectTool,
-    BoxZoomTool,
-    CrosshairTool,
-    EditTool,
-    FreehandDrawTool,
-    HelpTool,
-    HoverTool,
-    LassoSelectTool,
-    PanTool,
-    PointDrawTool,
-    PolyDrawTool,
-    PolyEditTool,
-    PolySelectTool,
-    RangeTool,
-    RedoTool,
-    ResetTool,
-    SaveTool,
-    TapTool,
-    WheelPanTool,
-    WheelZoomTool,
-    ZoomInTool,
-    ZoomOutTool,
-)
 
-tool_name_list = [
-    "BoxEdit",
-    "BoxSelect",
-    "BoxZoom",
-    "Crosshair",
-    "Edit",
-    "FreehandDraw",
-    "Help",
-    "Hover",
-    "LassoSelect",
-    "Pan",
-    "PointDraw",
-    "PolyDraw",
-    "PolyEdit",
-    "PolySelect",
-    "RangeTool",
-    "RedoTool",
-    "Reset",
-    "Save",
-    "Tap",
-    "WheelPan",
-    "WheelZoom",
-    "ZoomIn",
-    "ZoomOut",
-]
-
-tool_instances = [
-    BoxEditTool(),
-    BoxSelectTool(),
-    BoxZoomTool(),
-    CrosshairTool(),
-    EditTool(),
-    FreehandDrawTool(),
-    HelpTool(),
-    HoverTool(),
-    LassoSelectTool(),
-    PanTool(),
-    PointDrawTool(),
-    PolyDrawTool(),
-    PolyEditTool(),
-    PolySelectTool(),
-    RangeTool(),
-    RedoTool(),
-    ResetTool(),
-    SaveTool(),
-    TapTool(),
-    WheelPanTool(),
-    WheelZoomTool(),
-    ZoomInTool(),
-    ZoomOutTool(),
-]
+FONT_SIZES = ["10pt", "12pt", "16pt", "18pt", "24pt", "32pt"]
+FONT_CHOICES = ["helvetica", "times", "calibri"]
+FONT_STYLES = ["normal", "bold", "italic", "bold_italic"]
+DASH_PATTERNS = ["solid", "dashed", "dotted", "dotdash", "dashdot"]
 
 Toolbar_Options = {
-    "multi_choices": {"tools": (tool_name_list, tool_instances)},
     "choices": {
         "logo": (["normal", "grey", "none"], ["normal", "grey", None]),
         "autohide": (["false", "true"], [False, True]),
@@ -100,8 +27,6 @@ Plot_Options = {
             ["auto", "fixed", "fit", "min", "max"],
             ["auto", "fixed", "fit", "min", "max"],
         ),
-        "x_scale": (["Linear", "Log"], [LinearScale(), LogScale()]),
-        "y_scale": (["Linear", "Log"], [LinearScale(), LogScale()]),
         "title_location": (
             ["above", "below", "left", "right"],
             ["above", "below", "left", "right"],
@@ -255,19 +180,10 @@ Title_Options = {
         ),
         "align": (["left", "right", "center"], ["left", "right", "center"]),
         "border_line_join": (["bevel", "miter", "round"], ["bevel", "miter", "round"]),
-        "text_font_style": (
-            ["bold", "normal", "italic", "bold italic"],
-            ["bold", "normal", "italic", "bold italic"],
-        ),
+        "text_font_style": (FONT_STYLES, FONT_STYLES),
         "vertical_align": (["bottom", "top", "middle"], ["bottom", "top", "middle"]),
-        "text_font_size": (
-            ["10pt", "12pt", "16pt", "18pt", "24pt", "32pt"],
-            ["10pt", "12pt", "16pt", "18pt", "24pt", "32pt"],
-        ),
-        "text_font": (
-            ["helvetica", "times", "calibri"],
-            ["helvetica", "times", "calibri"],
-        ),
+        "text_font_size": (FONT_SIZES, FONT_SIZES),
+        "text_font": (FONT_CHOICES, FONT_CHOICES),
     },
     "floats": {
         "text_line_height": 1.0,
@@ -290,18 +206,9 @@ Axis_Options = {
             ["horizontal", "vertical"],
             ["horizontal", "vertical"],
         ),
-        "major_tick_line_dash": (
-            ["solid", "dashed", "dotted", "dotdash", "dashdot"],
-            ["solid", "dashed", "dotted", "dotdash", "dashdot"],
-        ),
-        "axis_label_text_font_style": (
-            ["normal", "italic", "bold", "bold italic"],
-            ["normal", "italic", "bold", "bold italic"],
-        ),
-        "major_label_text_font_style": (
-            ["normal", "italic", "bold", "bold italic"],
-            ["normal", "italic", "bold", "bold italic"],
-        ),
+        "major_tick_line_dash": (DASH_PATTERNS, DASH_PATTERNS),
+        "axis_label_text_font_style": (FONT_STYLES, FONT_STYLES),
+        "major_label_text_font_style": (FONT_STYLES, FONT_STYLES),
         "axis_line_join": (["miter", "round", "bevel"], ["miter", "round", "bevel"]),
         "axis_line_cap": (["butt", "round", "square"], ["butt", "round", "square"]),
         "axis_label_text_align": (
@@ -312,26 +219,17 @@ Axis_Options = {
             ["butt", "round", "square"],
             ["butt", "round", "square"],
         ),
-        "axis_line_dash": (
-            ["solid", "dashed", "dotted", "dotdash", "dashdot"],
-            ["solid", "dashed", "dotted", "dotdash", "dashdot"],
-        ),
+        "axis_line_dash": (DASH_PATTERNS, DASH_PATTERNS),
         "minor_tick_line_cap": (
             ["butt", "round", "square"],
             ["butt", "round", "square"],
         ),
-        "minor_tick_line_dash": (
-            ["solid", "dashed", "dotted", "dotdash", "dashdot"],
-            ["solid", "dashed", "dotted", "dotdash", "dashdot"],
-        ),
+        "minor_tick_line_dash": (DASH_PATTERNS, DASH_PATTERNS),
         "major_label_text_baseline": (
             ["top", "middle", "bottom", "alphabetic", "hanging", "ideographic"],
             ["top", "middle", "bottom", "alphabetic", "hanging", "ideographic"],
         ),
-        "major_label_text_font_size": (
-            ["10pt", "12pt", "16pt", "24pt", "32pt"],
-            ["10pt", "12pt", "16pt", "24pt", "32pt"],
-        ),
+        "major_label_text_font_size": (FONT_SIZES, FONT_SIZES),
         "major_label_text_align": (
             ["left", "right", "center"],
             ["left", "right", "center"],
@@ -348,16 +246,11 @@ Axis_Options = {
             ["miter", "round", "bevel"],
             ["miter", "round", "bevel"],
         ),
-        "axis_label_text_font_size": (
-            ["10pt", "12pt", "16pt", "24pt", "32pt"],
-            ["10pt", "12pt", "16pt", "24pt", "32pt"]
-        ),
-        "major_label_text_font": (["helvetica","times","calibri"],["helvetica","times","calibri"]),
-        "axis_label_text_font":  (["helvetica","times","calibri"],["helvetica","times","calibri"]),
+        "axis_label_text_font_size": (FONT_SIZES, FONT_SIZES),
+        "major_label_text_font": (FONT_CHOICES, FONT_CHOICES),
+        "axis_label_text_font": (FONT_CHOICES, FONT_CHOICES),
     },
-    "strings": {
-        "axis_label": "Label",
-    },
+    "strings": {"axis_label": "Label"},
     "ints": {
         "axis_line_dash_offset": 0,
         "major_label_standoff": 5,

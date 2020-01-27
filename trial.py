@@ -1,5 +1,5 @@
-import inspect
-from bokeh.models.widgets import Button
+import textwrap
+from bokeh.models.widgets import Button, PreText
 from bokeh.layouts import column, grid
 from bokeh.io import curdoc
 from bokeh.model import collect_models
@@ -21,17 +21,6 @@ from options import (
 from widgets import ModelBuilder
 
 
-def save_handler(
-    plot_param_dict,
-    toolbar_param_dict,
-    grid0_param_dict,
-    grid1_param_dict,
-    title_param_dict,
-    xaxis_param_dict,
-    yaxis_param_dict,
-):
-    for kind in ["plot", "grid0", "grid1","toolbar", "title", "xaxis", "yaxis"]:
-        print("{}_opts = ".format(kind), eval("{}_param_dict".format(kind)))
 
 
 def button_handler(
@@ -55,8 +44,13 @@ def button_handler(
     )
 
     layout.children[0] = P
-
-
+    for div_name in ['grid0','grid1','toolbar','title','xaxis','yaxis','plot']:
+        M = curdoc().get_model_by_name(div_name+'_div')
+        text=""
+        for line in textwrap.wrap(str(eval('{}_param_dict'.format(div_name))),break_long_words=False):
+            text = text+line+'\n'
+        M.text = text
+        
 def make_plot(
     plot_param_dict,
     toolbar_param_dict,
@@ -95,7 +89,7 @@ def make_plot(
     return P
 
 
-Print = Button()
+Print = Button(label = "Show Python Options Dict")
 PlotBuilder = ModelBuilder(Plot_Options)
 ToolbarBuilder = ModelBuilder(Toolbar_Options)
 GridBuilder0 = ModelBuilder(Grid_Options)
@@ -111,8 +105,6 @@ grid0_param_dict, grid1_param_dict = GridBuilder0.param_dict, GridBuilder1.param
 grid0_widgets, grid1_widgets = GridBuilder0.widgets, GridBuilder1.widgets
 xaxis_widgets, yaxis_widgets = Xaxis.widgets, Yaxis.widgets
 xaxis_param_dict, yaxis_param_dict = Xaxis.param_dict, Yaxis.param_dict
-
-print(xaxis_param_dict)
 
 Print.on_click(
     partial(
@@ -137,15 +129,15 @@ plot = make_plot(
     yaxis_param_dict,
 )
 
-xgrid_panel = Panel(child=column(Print, grid(grid0_widgets, ncols=3)), title="xGrid")
-ygrid_panel = Panel(child=column(Print, grid(grid1_widgets, ncols=3)), title="yGrid")
+xgrid_panel = Panel(child=column(Print, grid(grid0_widgets, ncols=3), PreText(text="xGRID_OPTIONS = ",name='grid0_div')), title="xGrid")
+ygrid_panel = Panel(child=column(Print, grid(grid1_widgets, ncols=3), PreText(text="yGRID_OPTIONS = ",name='grid1_div')), title="yGrid")
 toolbar_panel = Panel(
-    child=column(Print, grid(toolbar_widgets, ncols=3)), title="Toolbar"
+    child=column(Print, grid(toolbar_widgets, ncols=3),PreText(text="TOOLBAR_OPTIONS = ",name='toolbar_div')), title="Toolbar"
 )
-title_panel = Panel(child=column(Print, grid(title_widgets, ncols=3)), title="Title")
-xaxis_panel = Panel(child=column(Print, grid(xaxis_widgets, ncols=3)), title="xAxes")
-yaxis_panel = Panel(child=column(Print, grid(yaxis_widgets, ncols=3)), title="yAxes")
-plot_panel = Panel(child=column(Print, grid(plot_widgets, ncols=3)), title="Plot")
+title_panel = Panel(child=column(Print, grid(title_widgets, ncols=3),PreText(text="TITLE_OPTIONS = ",name='title_div')), title="Title")
+xaxis_panel = Panel(child=column(Print, grid(xaxis_widgets, ncols=3),PreText(text="xAXIS_OPTIONS = ",name='xaxis_div')), title="xAxes")
+yaxis_panel = Panel(child=column(Print, grid(yaxis_widgets, ncols=3), PreText(text="yAXIS_OPTIONS = ",name = 'yaxis_div')), title="yAxes")
+plot_panel = Panel(child=column(Print, grid(plot_widgets, ncols=3),PreText(text='PLOT_OPTIONS = ',name='plot_div')), title="Plot")
 basic_tabs = [
     plot_panel,
     xgrid_panel,
@@ -157,19 +149,8 @@ basic_tabs = [
 ]
 tabs = Tabs(tabs=basic_tabs)
 
-save = Button()
-save.on_click(
-    partial(
-        save_handler,
-        plot_param_dict,
-        toolbar_param_dict,
-        grid0_param_dict,
-        grid1_param_dict,
-        title_param_dict,
-        xaxis_param_dict,
-        yaxis_param_dict,
-    )
-)
 
-layout = column(plot, save, tabs)
+
+
+layout = column(plot,  tabs)
 curdoc().add_root(layout)
