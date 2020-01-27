@@ -49,17 +49,14 @@ class ModelBuilder:
         self.widgets = sorted(self.widgets,key=lambda x: x.name)
         
     def _choice_handler(self, param_dict, param, choices, values, attr, old, new):
-        print("attr=", attr, "old=", old, "opt=", new, "who=", param)
         choice_dict = dict(zip(choices, values))
         self.param_dict[param] = choice_dict[new]
 
     def _multi_choice_handler(self, param_dict, param, choices, values, attr, old, new):
-        print("attr=", attr, "old=", old, "opt=", new, "who=", param)
         active_list = [values[x] for x in new]
         self.param_dict[param] = active_list
 
     def _single_handler(self, param_dict, param, transform, attr, old, new):
-        print("attr=", attr, "old=", old, "who=", param, "new=", new)
         self.param_dict[param] = transform(new)
 
     def make_choice(self, choices, values, default, param, param_dict):
