@@ -1,6 +1,3 @@
-from sortedcollections import SortedDict
-from bokeh.models.scales import LogScale, LinearScale
-
 FONT_SIZES = ["10pt", "12pt", "16pt", "18pt", "24pt", "32pt"]
 FONT_CHOICES = ["helvetica", "times", "calibri"]
 FONT_STYLES = ["normal", "bold", "italic", "bold_italic"]
@@ -17,72 +14,95 @@ Toolbar_Options = {
 }
 
 Plot_Options = {
-    "multi_choices": {},
     "choices": {
-        "height_policy": (
-            ["auto", "fixed", "fit", "min", "max"],
-            ["auto", "fixed", "fit", "min", "max"],
-        ),
         "width_policy": (
             ["auto", "fixed", "fit", "min", "max"],
             ["auto", "fixed", "fit", "min", "max"],
         ),
+        "height_policy": (
+            ["auto", "fixed", "fit", "min", "max"],
+            ["auto", "fixed", "fit", "min", "max"],
+        ),
+        "align": (["start", "center", "end"], ["start", "center", "end"]),
         "title_location": (
             ["above", "below", "left", "right"],
             ["above", "below", "left", "right"],
         ),
-        "outline_line_cap": (["butt", "round", "square"], ["butt", "round", "square"]),
-        "outline_line_join": (["miter", "round", "bevel"], ["miter", "round", "bevel"]),
+        "outline_line_dash": (
+            ["solid", "dashed", "dotted", "dotdash", "dashdot"],
+            ["solid", "dashed", "dotted", "dotdash", "dashdot"],
+        ),
+        "reset_policy": (["standard", "event_only"], ["standard", "event_only"]),
+        "match_aspect": (["True", "False"], [True, False]),
         "sizing_mode": (
             [
-                "stretch_both",
                 "stretch_width",
                 "stretch_height",
+                "stretch_both",
                 "scale_width",
                 "scale_height",
                 "scale_both",
                 "fixed",
             ],
             [
-                "stretch_both",
                 "stretch_width",
                 "stretch_height",
+                "stretch_both",
                 "scale_width",
                 "scale_height",
                 "scale_both",
                 "fixed",
             ],
         ),
+        "outline_line_join": (["miter", "round", "bevel"], ["miter", "round", "bevel"]),
+        "disabled": (["True", "False"], [True, False]),
         "toolbar_location": (
-            ["above", "below", "left", "right"],
-            ["above", "below", "left", "right"],
+            ["right","above", "below", "left"],
+            ["right","above", "below", "left"],
         ),
+        "outline_line_cap": (["butt", "round", "square"], ["butt", "round", "square"]),
+        "visible": (["True", "False"], [True, False]),
+        "hidpi": (["True", "False"], [True, False]),
+        "toolbar_sticky": (["True", "False"], [True, False]),
+        "output_backend": (["canvas", "svg", "webgl"], ["canvas", "svg", "webgl"]),
+    },
+    "strings": {"name": "None"},
+    "ints": {
+        "max_height": 0,
+        "lod_interval": 300,
+        "max_width": 0,
+        "min_border_left": 0,
+        "min_border_right": 0,
+        "min_border_bottom": 0,
+        "min_height": 0,
+        "plot_height": 600,
+        "lod_timeout": 500,
+        "min_width": 0,
+        "height": 0,
+        "plot_width": 600,
+        "min_border": 5,
+        "width": 0,
+        "frame_height": 0,
+        "outline_line_dash_offset": 0,
+        "lod_factor": 10,
+        "lod_threshold": 2000,
+        "min_border_top": 0,
+        "frame_width": 0,
     },
     "floats": {
+        "outline_line_width": 1,
         "background_fill_alpha": 1.0,
+        "aspect_scale": 1.0,
         "border_fill_alpha": 1.0,
         "outline_line_alpha": 1.0,
-        "outline_line_width": 1.0,
-    },
-    "ints": {
-        "frame_height": None,
-        "frame_width": None,
-        "min_border": 5,
-        "min_border_bottom": None,
-        "min_border_left": None,
-        "min_border_right": None,
-        "min_border_top": None,
-        "outline_line_dash_offset": 0,
-        "plot_height": 600,
-        "plot_width": 600,
     },
     "colors": {
-        "background": "#ffffff",
-        "background_fill_color": "#ffffff",
         "border_fill_color": "#ffffff",
+        "background_fill_color": "#ffffff",
         "outline_line_color": "#e5e5e5",
     },
 }
+
 
 Grid_Options = {
     "multi_choices": {},
