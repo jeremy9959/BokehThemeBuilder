@@ -1,6 +1,6 @@
 import textwrap
-from bokeh.models.widgets import Button, PreText
-from bokeh.layouts import column, grid
+from bokeh.models.widgets import Button, PreText, Div
+from bokeh.layouts import column, grid,row
 from bokeh.io import curdoc
 from bokeh.models.glyphs import Line
 from bokeh.models import Plot, Toolbar, Grid, Title, Panel, Tabs
@@ -23,9 +23,8 @@ from widgets import ModelBuilder
 def button_handler(Builders):
     P = make_plot(Builders)
     layout.children[0] = P
+    text = ""
     for div_name in Builders:
-        M = curdoc().get_model_by_name(div_name + "_div")
-        text = ""
         for line in textwrap.wrap(
             div_name.upper()
             + "_OPTIONS = "
@@ -33,8 +32,8 @@ def button_handler(Builders):
             break_long_words=False, break_on_hyphens=False
         ):
             text = text + line + "\n"
-        M.text = text
-
+    M=doc.get_model_by_name('report')
+    M.text = text
 
 def make_plot(Builders):
     P = Plot(name="plot", **Builders["plot"].param_dict)
@@ -63,7 +62,8 @@ def make_plot(Builders):
 
     return P
 
-Print = Button(label="Show Python Options Dict")
+
+Print = Button(label="Activate")
 Builders = {
     "plot": ModelBuilder(Plot_Options),
     "toolbar": ModelBuilder(Toolbar_Options),
@@ -85,6 +85,10 @@ for n in Builders:
         ),
         title=n,
     )
+
+doc=curdoc()
+Report = PreText(text="",name="report")
 tabs = Tabs(tabs=list(panels.values()))
-layout = column(plot, tabs)
-curdoc().add_root(layout)
+layout = column(row(plot,Report), tabs)
+doc.add_root(layout)
+print(doc.get_model_by_name("report"))
