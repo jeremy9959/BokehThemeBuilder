@@ -22,8 +22,9 @@ from widgets import ModelBuilder
 
 def button_handler(Builders):
     P = make_plot(Builders)
-    layout.children[0] = P
+    layout.children[0].children[0] = P
     text = ""
+    M = Report
     for div_name in Builders:
         for line in textwrap.wrap(
             div_name.upper()
@@ -32,9 +33,9 @@ def button_handler(Builders):
             break_long_words=False, break_on_hyphens=False
         ):
             text = text + line + "\n"
-    M=doc.get_model_by_name('report')
     M.text = text
-
+    layout.children[0].children[1] = M
+    
 def make_plot(Builders):
     P = Plot(name="plot", **Builders["plot"].param_dict)
     P.add_glyph(
@@ -80,14 +81,13 @@ for n in Builders:
     panels[n] = Panel(
         child=column(
             Print,
-            PreText(text=n.upper() + "_OPTIONS = ", name=n + "_div"),
             grid(Builders[n].widgets, ncols=3),
         ),
         title=n,
     )
 
 doc=curdoc()
-Report = PreText(text="",name="report")
+Report = PreText(text="Python Style Dicts\n",name='report')
 tabs = Tabs(tabs=list(panels.values()))
 layout = column(row(plot,Report), tabs)
 doc.add_root(layout)
