@@ -1,6 +1,8 @@
 ## BokehModelBuilder
 
-<img src="images/ui.png" width=300/>
+<table>
+<tr><td><img src="images/ui.png" width=300/></td><td><img src="images/ModelStructureGraph.png" width=300></td></tr>
+</table>
 
 [bokeh](http://bokeh.org) is a library for generating interactive graphics and dashboards in python. 
 Every component offers a myriad of customizing options, and I find it impossible to keep track of them.
