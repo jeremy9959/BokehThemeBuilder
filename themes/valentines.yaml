@@ -1,0 +1,33 @@
+attrs:
+  Axis:
+    axis_label_text_color: '#fffb00'
+    axis_label_text_font: times
+    axis_line_color: '#fffb00'
+    major_label_text_color: '#fffb00'
+    major_label_text_font: times
+    major_tick_line_color: '#fffb00'
+    minor_tick_line_color: '#fffb00'
+  Grid:
+    grid_line_alpha: 0.7
+    grid_line_color: '#fffb00'
+    minor_grid_line_alpha: 0.2
+    minor_grid_line_color: '#fffb00'
+  Plot:
+    align: start
+    aspect_scale: 1.0
+    background_fill_alpha: 0.8
+    background_fill_color: '#ffa29c'
+    border_fill_color: '#ff3c39'
+    disabled: true
+    frame_height: 400
+    frame_width: 400
+    min_border_bottom: 30
+    min_border_left: 30
+    min_border_right: 30
+    outline_line_alpha: 0.0
+    outline_line_color: '#fffb00'
+    outline_line_width: 4.0
+  Title:
+    text: Valentines Day Theme
+    text_color: '#fffb00'
+    text_font: times
