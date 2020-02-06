@@ -66,7 +66,6 @@ Plot_Options = {
         "toolbar_sticky": (["True", "False"], [True, False]),
         "output_backend": (["canvas", "svg", "webgl"], ["canvas", "svg", "webgl"]),
     },
-    "strings": {"name": "None"},
     "ints": {
         "max_height": 0,
         "lod_interval": 300,
