@@ -14,7 +14,11 @@ As your theme evolves, the page will show yaml code to the right of your plot.
 You can copy this yaml into a file to create a bokeh theme. [This blog post](https://blog.bokeh.org/posts/styling-bokeh)
 explains how to use the theme file to style your plots.
 
-The [valentines theme](themes/valentines.yaml) is an example created by this tool
+This [valentines theme](themes/valentines.yaml) is an example created by this tool:
+
+<center>
+<img src="images/valentines.png" width=100>
+</center>
 
 The main.py file is a bokeh server app that loads the widgets.py and options.py modules.  You run it like this:
 ```
