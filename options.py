@@ -205,7 +205,6 @@ Title_Options = {
         "text_font": (FONT_CHOICES, FONT_CHOICES),
     },
     "floats": {
-        "text_line_height": 1.0,
         "offset": 0.0,
         "border_line_alpha": 1.0,
         "background_fill_alpha": 1.0,
