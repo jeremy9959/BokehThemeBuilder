@@ -27,7 +27,7 @@ $ bokeh serve .
 ```
 and navigate in your browser to localhost port 5006.
 
-You can also try it directly from heroku by going to [the heroku app page](http://bokehmodelbuilder.herokuapp.com).
+You can also try it directly from heroku by going to [the heroku app page](http://bokehthemebuilder.herokuapp.com).
 
 The utils directory includes some tools for working with this setup including code for producing the graphical display
 of models as in the image on the right above.
