@@ -1,6 +1,6 @@
 import textwrap
 import yaml
-from bokeh.models.widgets import Button, PreText
+from bokeh.models.widgets import Button, PreText, Div
 from bokeh.layouts import column, grid, row
 from bokeh.io import curdoc
 from bokeh.models.glyphs import Line
@@ -19,6 +19,17 @@ from options import (
 )
 from widgets import ModelBuilder
 
+help_text = """<p><b>Instructions:</b> To use this tool, set the desired defaults using the widgets
+below and on the other tabs.  As you proceed,  push the activate button to preview your selections
+as they take effect on the plot shown.  </p>
+<p> As you make choices, yaml code for your developing theme will
+appear in this space.  Once you're satisfied, copy the yaml into a theme file
+and load it into your bokeh app.  The blog post <a href="https://blog.bokeh.org/posts/styling-bokeh">
+Styling Bokeh Visualizations </a> explains how to use the theme file.
+</p><p> See <a href="https://github.com/jeremy9959/BokehThemeBuilder"> the github repo </a> for the code
+for this app.</p>
+"""
+
 
 def button_handler(Builders):
     P = make_plot(Builders)
@@ -26,7 +37,7 @@ def button_handler(Builders):
     theme_yaml = {'attrs':{}}
     for div_name in Builders:
         theme_yaml['attrs'][div_name] = Builders[div_name].param_dict
-    text = yaml.safe_dump(theme_yaml,width=50,indent=2)
+    text = '<pre>'+yaml.safe_dump(theme_yaml,width=50,indent=2)+'</pre>'
     Report.update(text=text)
 
 
@@ -66,7 +77,7 @@ def make_plot(Builders):
     return P
 
 
-Print = Button(label="Activate")
+Print = Button(label="Activate",button_type="success", width=200)
 Builders = {
     "Plot": ModelBuilder(Plot_Options),
     "Title": ModelBuilder(Title_Options),
@@ -80,7 +91,8 @@ panels = {}
 for n in Builders:
     panels[n] = Panel(child=column(Print, grid(Builders[n].widgets, ncols=3)), title=n)
 
-Report = PreText(text="Style Yaml\n", name="report")
+Report = Div(text=help_text, name="report")
 tabs = Tabs(tabs=list(panels.values()))
 layout = column(row(plot, Report), tabs)
+curdoc().title = "Bokeh Theme Builder"
 curdoc().add_root(layout)
