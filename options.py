@@ -1,5 +1,5 @@
 FONT_SIZES = ["10pt", "12pt", "16pt", "18pt", "24pt", "32pt"]
-FONT_CHOICES = ["helvetica", "times", "calibri"]
+FONT_CHOICES = ["Helvetica", "Times", "Calibri", "Candara", "Arial", "Bookman"]
 FONT_STYLES = ["normal", "bold", "italic", "bold_italic"]
 DASH_PATTERNS = ["solid", "dashed", "dotted", "dotdash", "dashdot"]
 

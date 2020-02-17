@@ -23,11 +23,14 @@ from widgets import ModelBuilder
 
 def make_app(doc):
 
+    banner = '<H1><center>Bokeh Theme Builder</center></H1>'
+    
     help_text = """<p><b>Instructions:</b> To use this tool, set the desired defaults using the widgets
     below and on the other tabs.  As you proceed,  push the activate button to preview your selections
     as they take effect on the plot shown.  </p>
     <p> As you make choices, yaml code for your developing theme will
-    appear in this space.  Once you're satisfied, copy the yaml into a theme file
+    appear in this space.  Once you're satisfied, push the save button to download the yaml, or just
+    copy the yaml into a theme file
     and load it into your bokeh app.  The blog post <a href="https://blog.bokeh.org/posts/styling-bokeh">
     Styling Bokeh Visualizations </a> explains how to use the theme file.
     </p><p> See <a href="https://github.com/jeremy9959/BokehThemeBuilder"> the github repo </a> for the code
@@ -47,7 +50,7 @@ def make_app(doc):
 
     def button_handler(Builders):
         P = make_plot(Builders)
-        layout.children[0].children[0] = P
+        layout.children[1].children[0] = P
         theme_yaml = {'attrs':{}}
         for div_name in Builders:
             theme_yaml['attrs'][div_name] = Builders[div_name].param_dict
@@ -60,7 +63,7 @@ def make_app(doc):
     def make_plot(Builders):
         P = Plot(name="Plot", **Builders["Plot"].param_dict)
         P.add_glyph(
-            ColumnDataSource({"x": [1, 2, 3], "y": [1, 2, 3]}),
+            ColumnDataSource({"x": list(range(-10,10)), "y": list(range(-10,10))}),
             Line(x="x", y="y"),
             visible=False,
         )
@@ -119,15 +122,11 @@ def make_app(doc):
     panels = {}
     for n in Builders:
         panels[n] = Panel(child=column(Print, grid(Builders[n].widgets, ncols=3)), title=n)
-
-
-
-
-
-
-
     tabs = Tabs(tabs=list(panels.values()))
-    layout = column(row(plot, column(Save, Report)), tabs)
+
+    Banner = Div(text=banner, name = 'banner', align='center')
+    
+    layout = column(Banner, row(plot, column(Save, Report)), tabs)
     doc.title = "Bokeh Theme Builder"
     doc.add_root(layout)
 
