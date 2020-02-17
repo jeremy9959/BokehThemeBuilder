@@ -1,7 +1,10 @@
 import yaml
 from bokeh.models.widgets import Button, PreText, Div
+from bokeh.models.callbacks import CustomJS
+from bokeh.embed import file_html
+from bokeh.resources import CDN
 from bokeh.layouts import column, grid, row
-from bokeh.io import curdoc
+from bokeh.io import curdoc, save
 from bokeh.models.glyphs import Line
 from bokeh.models import Plot, Toolbar, Grid, Title, Panel, Tabs
 from bokeh.models.tickers import BasicTicker
@@ -31,6 +34,16 @@ def make_app(doc):
     for this app.</p>
     """
 
+    js_code="""
+    var text = source.text ;
+    var file = new Blob([text.slice(5,-6)],{type:'text/plain'});
+    var elem = window.document.createElement('a');
+    elem.href = window.URL.createObjectURL(file);
+    elem.download = 'theme.yaml';
+    document.body.appendChild(elem);
+    elem.click();
+    document.body.removeChild(elem);
+    """
 
     def button_handler(Builders):
         P = make_plot(Builders)
@@ -39,9 +52,11 @@ def make_app(doc):
         for div_name in Builders:
             theme_yaml['attrs'][div_name] = Builders[div_name].param_dict
         text = '<pre>'+yaml.safe_dump(theme_yaml,width=50,indent=2)+'</pre>'
+        Save.disabled = False
+        Save.visible = True
         Report.update(text=text)
 
-
+        
     def make_plot(Builders):
         P = Plot(name="Plot", **Builders["Plot"].param_dict)
         P.add_glyph(
@@ -78,7 +93,9 @@ def make_app(doc):
         return P
 
 
-    Print = Button(label="Activate",button_type="success", width=200)
+
+
+
     Builders = {
         "Plot": ModelBuilder(Plot_Options),
         "Title": ModelBuilder(Title_Options),
@@ -86,15 +103,31 @@ def make_app(doc):
         "Grid": ModelBuilder(Grid_Options),
         "Axis": ModelBuilder(Axis_Options),
     }
+    Report = Div(text=help_text, name="report")
+
+    Print = Button(label="Activate",button_type="success", width=200)
     Print.on_click(partial(button_handler, Builders))
+
+    Save = Button(label="Save as theme.yaml",button_type="success",width=200, disabled=True, visible=False)
+    Save.callback = CustomJS(args=dict(source=Report), code=js_code)
+    
+
+                    
+
+    
     plot = make_plot(Builders)
     panels = {}
     for n in Builders:
         panels[n] = Panel(child=column(Print, grid(Builders[n].widgets, ncols=3)), title=n)
 
-    Report = Div(text=help_text, name="report")
+
+
+
+
+
+
     tabs = Tabs(tabs=list(panels.values()))
-    layout = column(row(plot, Report), tabs)
+    layout = column(row(plot, column(Save, Report)), tabs)
     doc.title = "Bokeh Theme Builder"
     doc.add_root(layout)
 
