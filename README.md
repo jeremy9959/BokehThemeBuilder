@@ -20,14 +20,14 @@ This [valentines theme](themes/valentines.yaml) is an example created by this to
 <img src="images/valentines.png" width=100>
 </center>
 
->>>>>>> master
+
 The main.py file is a bokeh server app that loads the widgets.py and options.py modules.  You run it like this:
 ```
 $ bokeh serve .
 ```
 and navigate in your browser to localhost port 5006.
 
-You can also try it directly from heroku by going to [the heroku app page](http://bokehmodelbuilder.herokuapp.com).
+You can also try it directly from heroku by going to [the heroku app page](http://bokehthemebuilder.herokuapp.com).
 
 The utils directory includes some tools for working with this setup including code for producing the graphical display
 of models as in the image on the right above.
