@@ -1,4 +1,4 @@
-FONT_SIZES = ["10pt", "12pt", "16pt", "18pt", "24pt", "32pt"]
+FONT_SIZES = ["4pt", "6pt", "8pt", "10pt", "12pt", "16pt", "18pt", "24pt", "32pt"]
 FONT_CHOICES = ["Helvetica", "Times", "Calibri", "Candara", "Arial", "Bookman"]
 FONT_STYLES = ["normal", "bold", "italic", "bold_italic"]
 DASH_PATTERNS = ["solid", "dashed", "dotted", "dotdash", "dashdot"]
@@ -57,8 +57,8 @@ Plot_Options = {
         "outline_line_join": (["miter", "round", "bevel"], ["miter", "round", "bevel"]),
         "disabled": (["True", "False"], [True, False]),
         "toolbar_location": (
-            ["right","above", "below", "left"],
-            ["right","above", "below", "left"],
+            ["right", "above", "below", "left"],
+            ["right", "above", "below", "left"],
         ),
         "outline_line_cap": (["butt", "round", "square"], ["butt", "round", "square"]),
         "visible": (["True", "False"], [True, False]),
@@ -300,3 +300,40 @@ Axis_Options = {
         "minor_tick_line_color": "black",
     },
 }
+
+Line_Options = {
+    "choices": {
+        "line_cap": (["butt", "round", "square"], ["butt", "round", "square"]),
+        "line_join": (["miter", "round", "bevel"], ["miter", "round", "bevel"]),
+        "line_dash": (
+            ["solid", "dashed", "dotted", "dotdash", "dashdot"],
+            ["solid", "dashed", "dotted", "dotdash", "dashdot"],
+        ),
+    },
+    "ints": {"line_dash_offset": 0},
+    "floats": {"line_alpha": 1.0, "line_width": 1.0},
+    "colors": {"line_color": "black"},
+}
+
+Text_Options = {
+    "choices": {
+        "text_baseline": (
+            ["top", "middle", "bottom", "alphabetic", "hanging", "ideographic"],
+            ["top", "middle", "bottom", "alphabetic", "hanging", "ideographic"],
+        ),
+        "text_font": (FONT_CHOICES, FONT_CHOICES),
+        "text_font_style": (
+            ["normal", "italic", "bold", "bold italic"],
+            ["normal", "italic", "bold", "bold italic"],
+        ),
+        "text_align": (["left", "right", "center"], ["left", "right", "center"]),
+        "text_font_size": (
+            ["10pt", "12pt", "16pt", "24pt", "32pt"],
+            ["10pt", "12pt", "16pt", "24pt", "32pt"],
+        ),
+    },
+    "floats": {"text_line_height": 1.2, "text_alpha": 1.0},
+    "colors": {"text_color": "#444444"},
+}
+
+Fill_Options = {"floats": {"fill_alpha": 1.0}, "colors": {"fill_color": "gray"}}

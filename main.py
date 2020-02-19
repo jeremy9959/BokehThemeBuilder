@@ -17,6 +17,9 @@ from options import (
     Grid_Options,
     Title_Options,
     Axis_Options,
+    Text_Options,
+    Line_Options,
+    Fill_Options
 )
 from widgets import ModelBuilder
 
@@ -28,11 +31,11 @@ def make_app(doc):
     help_text = """<p><b>Instructions:</b> To use this tool, set the desired defaults using the widgets
     below and on the other tabs.  As you proceed,  push the activate button to preview your selections
     as they take effect on the plot shown.  </p>
-    <p> As you make choices, yaml code for your developing theme will
-    appear in this space.  Once you're satisfied, push the save button to download the yaml, or just
-    copy the yaml into a theme file
-    and load it into your bokeh app.  The blog post <a href="https://blog.bokeh.org/posts/styling-bokeh">
-    Styling Bokeh Visualizations </a> explains how to use the theme file.
+    <p> As you make choices, yaml code for your developing theme will appear in this space.  Once you're 
+    satisfied, push the save button (which will appear once you get started) to download the yaml, or just
+    copy the yaml into a theme file and load it into your bokeh app.</p>
+    <p> The blog post <a href="https://blog.bokeh.org/posts/styling-bokeh">
+    Styling Bokeh Visualizations </a> explains how to use the theme file.</p>
     </p><p> See <a href="https://github.com/jeremy9959/BokehThemeBuilder"> the github repo </a> for the code
     for this app.</p>
     """
@@ -49,18 +52,23 @@ def make_app(doc):
     """
 
     LineDataSource = ColumnDataSource(
-        {"x": [-10, -8, -3, 1, 5, 14], "y": [6, -2, 3, -1]}
+        {"x": [-10, -8, -3, 1, 5, 14], "y": [6, -2, 3, -1,-3,8]}
     )
     PointDataSource = ColumnDataSource(
         {"x": [-7, -2, 3, 7], "y": [4, -5, -2, 7], "name": ["JFK", "LBJ", "HRT", "FDR"]}
     )
 
+    yaml_translation_key = {"Line":"line_defaults", "GlyphText":"text_defaults", "GlyphFill":"fill_defaults"}
+    
     def button_handler(Builders):
         P = make_plot(Builders)
         layout.children[1].children[0] = P
         theme_yaml = {"attrs": {}}
         for div_name in Builders:
-            theme_yaml["attrs"][div_name] = Builders[div_name].param_dict
+            if div_name in yaml_translation_key:
+                theme_yaml[yaml_translation_key[div_name]] = Builders[div_name].param_dict
+            else:
+                theme_yaml["attrs"][div_name] = Builders[div_name].param_dict
         text = "<pre>" + yaml.safe_dump(theme_yaml, width=50, indent=2) + "</pre>"
         Save.disabled = False
         Save.visible = True
@@ -70,9 +78,9 @@ def make_app(doc):
         P = Plot(name="Plot", **Builders["Plot"].param_dict)
         P.x_range = Range1d(-15, 15)
         P.y_range = Range1d(-10, 10)
-        P.add_glyph(LineDataSource, Line(x="x", y="y"))
-        P.add_glyph(PointDataSource, Circle(x="x", y="y", radius=0.3))
-        P.add_glyph(PointDataSource, Text(x=dodge("x", 0.4), y="y", text="name"))
+        P.add_glyph(LineDataSource, Line(x="x", y="y",**Builders["Line"].param_dict))
+        P.add_glyph(PointDataSource, Circle(x="x", y="y", radius=0.3,**Builders["Line"].param_dict,**Builders["GlyphFill"].param_dict))
+        P.add_glyph(PointDataSource, Text(x=dodge("x", 0.4), y="y", text="name",**Builders["GlyphText"].param_dict))
         P.toolbar = Toolbar(name="Toolbar", **Builders["Toolbar"].param_dict)
         P.add_layout(
             Grid(dimension=0, **Builders["Grid"].param_dict, ticker=BasicTicker()),
@@ -107,6 +115,9 @@ def make_app(doc):
         "Toolbar": ModelBuilder(Toolbar_Options),
         "Grid": ModelBuilder(Grid_Options),
         "Axis": ModelBuilder(Axis_Options),
+        "Line": ModelBuilder(Line_Options),
+        "GlyphFill": ModelBuilder(Fill_Options),
+        "GlyphText": ModelBuilder(Text_Options),
     }
     Report = Div(text=help_text, name="report")
 
