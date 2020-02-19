@@ -1,6 +1,7 @@
 from bokeh.models.widgets import TextInput, ColorPicker, Select, CheckboxGroup
 from functools import partial
 
+
 class ModelBuilder:
     def __init__(self, Options):
         self.Options = Options
@@ -34,10 +35,10 @@ class ModelBuilder:
             pass
 
         for kind, maker in [
-                ("ints", self.make_int),
-                ("floats", self.make_float),
-                ("colors", self.make_color),
-                ("strings", self.make_string),
+            ("ints", self.make_int),
+            ("floats", self.make_float),
+            ("colors", self.make_color),
+            ("strings", self.make_string),
         ]:
             try:
                 for attribute, options in self.Options[kind].items():
@@ -46,8 +47,8 @@ class ModelBuilder:
             except KeyError:
                 continue
 
-        self.widgets = sorted(self.widgets,key=lambda x: x.name)
-        
+        self.widgets = sorted(self.widgets, key=lambda x: x.name)
+
     def _choice_handler(self, param_dict, param, choices, values, attr, old, new):
         choice_dict = dict(zip(choices, values))
         self.param_dict[param] = choice_dict[new]
@@ -60,50 +61,45 @@ class ModelBuilder:
         self.param_dict[param] = transform(new)
 
     def make_choice(self, choices, values, default, param, param_dict):
-        radio = Select(options=choices, value=choices[default], title=param,name=param)
+        radio = Select(options=choices, value=choices[default], title=param, name=param)
         radio.on_change(
-            "value",
-            partial(self._choice_handler,  param_dict, param, choices, values),
+            "value", partial(self._choice_handler, param_dict, param, choices, values)
         )
         return radio
 
     def make_multi_choice(self, choices, values, default, param, param_dict):
-        checkbox = CheckboxGroup(labels=choices, inline=False,name=param)
+        checkbox = CheckboxGroup(labels=choices, inline=False, name=param)
         checkbox.on_change(
             "active",
-            partial(
-                self._multi_choice_handler, param_dict, param, choices, values
-            ),
+            partial(self._multi_choice_handler, param_dict, param, choices, values),
         )
         return checkbox
 
     def make_float(self, default, param, param_dict):
-        area = TextInput(value=str(default), title=param,name=param)
+        area = TextInput(value=str(default), title=param, name=param)
         area.on_change(
             "value",
-            partial(self._single_handler,  param_dict, param, lambda x: float(x)),
+            partial(self._single_handler, param_dict, param, lambda x: float(x)),
         )
         return area
 
     def make_int(self, default, param, param_dict):
-        area = TextInput(value=str(default), title=param,name=param)
+        area = TextInput(value=str(default), title=param, name=param)
         area.on_change(
-            "value",
-            partial(self._single_handler,  param_dict, param, lambda x: int(x)),
+            "value", partial(self._single_handler, param_dict, param, lambda x: int(x))
         )
         return area
 
     def make_color(self, default, param, param_dict):
-        picker = ColorPicker(color=default, title=param,name=param)
+        picker = ColorPicker(color=default, title=param, name=param)
         picker.on_change(
-            "color", partial(self._single_handler,  param_dict, param, lambda x: x)
+            "color", partial(self._single_handler, param_dict, param, lambda x: x)
         )
         return picker
 
     def make_string(self, default, param, param_dict):
-        area = TextInput(value="Title", title=param,name=param)
+        area = TextInput(value="Title", title=param, name=param)
         area.on_change(
-            "value",
-            partial(self._single_handler, param_dict, param, lambda x: x)
-            )
+            "value", partial(self._single_handler, param_dict, param, lambda x: x)
+        )
         return area
