@@ -10,12 +10,12 @@ import base64
 result = ""
 
 def input_handler(attr, old, new):
-    result = json.loads(base64.b64decode(new))
-    D = Document().from_json(result)
+    result = base64.b64decode(new)
+    D = Document().from_json_string(result)
     f = D.roots[0]
     D.clear()
     doc.clear()
-    doc.add_root(column(file_in,row(f,M)))
+    doc.add_root(column(file_in,f))
     
 file_in = FileInput(accept='.json')
 file_in.on_change('value',input_handler)
