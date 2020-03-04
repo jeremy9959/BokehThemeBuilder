@@ -152,6 +152,8 @@ Grid_Options = {
                 "*",
             ],
         ),
+	"grid_line_dash": (DASH_PATTERNS, DASH_PATTERNS),
+	"minor_grid_line_dash": (DASH_PATTERNS, DASH_PATTERNS),
         "grid_line_cap": (["butt", "round", "square"], ["butt", "round", "square"]),
         "grid_line_join": (["bevel", "miter", "round"], ["bevel", "miter", "round"]),
         "minor_grid_line_cap": (
