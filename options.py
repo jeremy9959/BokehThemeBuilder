@@ -108,7 +108,7 @@ Grid_Options = {
     "colors": {
         "minor_grid_line_color": "#FFFFFF",
         "band_fill_color": "#FFFFFF",
-        "band_hatch_color": "#000000",
+        "band_hatch_color": "#FFFFFF",
         "grid_line_color": "#e5e5e5",
     },
     "choices": {
@@ -168,6 +168,8 @@ Grid_Options = {
             ["underlay", "image", "glyph", "annotation", "overlay"],
             ["underlay", "image", "glyph", "annotation", "overlay"],
         ),
+        "minor_grid_line_dash": (DASH_PATTERNS, DASH_PATTERNS),
+        "grid_line_dash": (DASH_PATTERNS, DASH_PATTERNS),
     },
     "floats": {
         "grid_line_width": 1.0,
@@ -325,13 +327,13 @@ Text_Options = {
         ),
         "text_font": (FONT_CHOICES, FONT_CHOICES),
         "text_font_style": (
-            ["normal", "italic", "bold", "bold italic"],
-            ["normal", "italic", "bold", "bold italic"],
+            FONT_STYLES, 
+            FONT_STYLES,
         ),
         "text_align": (["left", "right", "center"], ["left", "right", "center"]),
         "text_font_size": (
-            ["10pt", "12pt", "16pt", "24pt", "32pt"],
-            ["10pt", "12pt", "16pt", "24pt", "32pt"],
+            FONT_SIZES,
+            FONT_SIZES
         ),
     },
     "floats": {"text_line_height": 1.2, "text_alpha": 1.0},
