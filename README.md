@@ -37,7 +37,7 @@ Using this class on the simple figure
 
 yields this interactive display:
 
-<img src="peek.gif">
+<img src="images/peek.gif">
 
 These two images were created in a jupyter notebook using this code:
 
