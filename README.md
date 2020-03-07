@@ -18,7 +18,7 @@ This [valentines theme](themes/valentines.yaml) is an example created by this to
 <img src="images/valentines.png" width=100>
 </center>
 
-<img src="images=theme.gif" width=300> 
+<img src="images/theme.gif" width=300> 
 
 
 The main.py file is a bokeh server app that loads the widgets.py and options.py modules.  You run it like this:
