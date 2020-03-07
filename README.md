@@ -11,7 +11,8 @@ working with this tool to prepare a plot format that they like, and then obtaini
 that they can include in whatever bokeh project they are working on.
 
 As your theme evolves, the page will show yaml code to the right of your plot. 
-You can copy this yaml into a file to create a bokeh theme. [This blog post](https://blog.bokeh.org/posts/styling-bokeh)
+You can download this yaml code by clicking the download button (creating the file ```theme.yaml```) or just
+copy this yaml into a file to create a bokeh theme. [This blog post](https://blog.bokeh.org/posts/styling-bokeh)
 explains how to use the theme file to style your plots.
 
 This [valentines theme](themes/valentines.yaml) is an example created by this tool:
