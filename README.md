@@ -1,7 +1,7 @@
 ## BokehThemeBuilder
 
 <table>
-<tr><td><img src="images/app.png" width=300/></td><td><img src="images/ModelStructureGraph.png" width=300></td></tr>
+<tr><td><img src="images/app.png" width=300/></td>
 </table>
 
 [bokeh](http://bokeh.org) is a library for generating interactive graphics and dashboards in python. 
@@ -29,8 +29,30 @@ and navigate in your browser to localhost port 5006.
 
 You can also try it directly from heroku by going to [the heroku app page](http://bokehthemebuilder.herokuapp.com).
 
-The utils directory includes some tools for working with this setup including code for producing the graphical display
-of models as in the image on the right above.
+The utils directory includes the file ```structure.py``` where you can find the ```BokehStructureGraph```
+class. This can be used to analyze models and determine which attributes are available for customization.
+Using this class on the simple figure
+
+<img src="images/simple.png" width=200>
+
+yields this interactive display:
+
+<img src="peek.gif">
+
+These two images were created in a jupyter notebook using this code:
+
+```
+from utils.structure import BokehStructureGraph
+from bokeh.plotting import figure, show, output_notebook
+output_notebook()
+# draw the easy figure
+f = figure(height=200,width=200)
+f.line(x=[1,2,3],y=[1,2,3])
+f.circle(x=[3,2,1],y=[1,2,3],size=10, color='red')
+show(f)
+# now draw the structure graph with interactive datatable
+show(BokehStructureGraph(f).model)
+```
 
 
 
