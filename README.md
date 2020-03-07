@@ -1,8 +1,5 @@
 ## BokehThemeBuilder
 
-<table>
-<tr><td><img src="images/app.png" width=300/></td>
-</table>
 
 [bokeh](http://bokeh.org) is a library for generating interactive graphics and dashboards in python. 
 Every component offers a myriad of customizing options, and I find it impossible to keep track of them.
@@ -21,6 +18,8 @@ This [valentines theme](themes/valentines.yaml) is an example created by this to
 <img src="images/valentines.png" width=100>
 </center>
 
+<img src="images=theme.gif" width=300> 
+
 
 The main.py file is a bokeh server app that loads the widgets.py and options.py modules.  You run it like this:
 ```
@@ -38,7 +37,7 @@ Using this class on the simple figure
 
 yields this interactive display:
 
-<img src="images/peek.gif">
+<img src="images/peek.gif" width=300>
 
 These two images were created in a jupyter notebook using this code:
 
