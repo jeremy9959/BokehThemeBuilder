@@ -1,4 +1,5 @@
 import yaml
+from bokeh import events
 from bokeh.models.widgets import Button, Div
 from bokeh.models.callbacks import CustomJS
 from bokeh.layouts import column, grid, row
@@ -157,7 +158,7 @@ def make_app(doc):
         disabled=True,
         visible=False,
     )
-    Save.callback = CustomJS(args=dict(source=Report), code=js_code)
+    Save.js_on_event(events.ButtonClick, CustomJS(args=dict(source=Report), code=js_code))
 
     plot = make_plot(Builders)
     panels = {}
