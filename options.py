@@ -168,8 +168,6 @@ Grid_Options = {
             ["underlay", "image", "glyph", "annotation", "overlay"],
             ["underlay", "image", "glyph", "annotation", "overlay"],
         ),
-        "minor_grid_line_dash": (DASH_PATTERNS, DASH_PATTERNS),
-        "grid_line_dash": (DASH_PATTERNS, DASH_PATTERNS),
     },
     "floats": {
         "grid_line_width": 1.0,
