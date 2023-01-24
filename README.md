@@ -7,8 +7,6 @@ This tool (very much under development) offers a graphical interface to those op
 may prepare a plot format that they like, and then obtain yaml code that they
 can include in whatever bokeh project they are working on.
 
-The tool is available as [bokehthemebuilder.herokuapp.com](https://bokehthemebuilder.herokuapp.com)
-
 As you select options,  the page will show yaml code to the right of your plot. 
 You can download this yaml code by clicking the download button (creating the file ```theme.yaml```) or just
 copy this yaml into a file to create a bokeh theme. [This blog post](https://blog.bokeh.org/posts/styling-bokeh)
